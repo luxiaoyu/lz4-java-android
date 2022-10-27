@@ -2,12 +2,12 @@
 为[lz4-java](https://github.com/lz4/lz4-java)编译 arm、x86 平台的动态库
 
 # Build
-```kts
+```shell
 ./gradlew assemble
 ```
 
 # 编译产出
-```kts
+```shell
 tree ./library/build/intermediates/stripped_native_libs/release/out/lib/
 ```
 
