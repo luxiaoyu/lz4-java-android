@@ -20,12 +20,12 @@ if(GNU_COMPATIBLE_COMPILER)
     endif()
 endif()
 
-set(LZ4_SRCS_LIB ${LZ4_PATH}lz4.c ${LZ4_PATH}lz4hc.c ${LZ4_PATH}lz4.h ${LZ4_PATH}lz4hc.h ${LZ4_PATH}lz4frame.c ${LZ4_PATH}lz4frame.h ${LZ4_PATH}xxhash.c)
+set(LZ4_SRCS_LIB ${LZ4_PATH}lz4.c ${LZ4_PATH}lz4hc.c ${LZ4_PATH}lz4.h ${LZ4_PATH}lz4hc.h ${LZ4_PATH}lz4frame.c ${LZ4_PATH}lz4frame.h ${LZ4_PATH}xxhash.c ${LZ4_JNI_PATH}net_jpountz_lz4_LZ4JNI.c ${LZ4_JNI_PATH}net_jpountz_xxhash_XXHashJNI.c)
 
-add_library(liblz4 SHARED ${LZ4_SRCS_LIB})
+add_library(liblz4-java SHARED ${LZ4_SRCS_LIB})
 
-set_target_properties(liblz4 PROPERTIES
-        OUTPUT_NAME lz4
+set_target_properties(liblz4-java PROPERTIES
+        OUTPUT_NAME lz4-java
         SOVERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}"
         )
 

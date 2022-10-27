@@ -13,7 +13,8 @@ val lz4Version = "1.9.3"
 group = "io.maryk.lz4"
 version = "${lz4Version}-2"
 
-val lz4Home = projectDir.resolve("lz4/lz4-$lz4Version")
+val lz4Home = projectDir.resolve("lz4-java/src/lz4")
+val jniHome = projectDir.resolve("lz4-java/src/jni")
 
 android {
     compileSdk = 31
@@ -23,8 +24,9 @@ android {
         targetSdk = 31
         externalNativeBuild {
             cmake {
-                targets.add("liblz4")
+                targets.add("liblz4-java")
                 arguments.add("-DLZ4_PATH=${lz4Home.absolutePath}/lib/")
+                arguments.add("-DLZ4_JNI_PATH=${jniHome.absolutePath}/")
             }
         }
     }
@@ -62,13 +64,13 @@ artifacts {
     archives(javadocJar)
 }
 
-val downloadLz4 by tasks.creating(Exec::class) {
+val buildLz4Java by tasks.creating(Exec::class) {
     workingDir = projectDir
-    commandLine("./downloadLz4.sh", lz4Version)
+    commandLine("./build_lz4-java.sh", lz4Version)
 }
 
 tasks.withType<com.android.build.gradle.tasks.ExternalNativeBuildJsonTask> {
-    dependsOn(downloadLz4)
+    dependsOn(buildLz4Java)
 }
 
 // Stub secrets to let the project sync and build without the publication values set up
