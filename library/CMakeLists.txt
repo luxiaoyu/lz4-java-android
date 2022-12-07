@@ -24,6 +24,9 @@ set(LZ4_SRCS_LIB ${LZ4_PATH}lz4.c ${LZ4_PATH}lz4hc.c ${LZ4_PATH}lz4.h ${LZ4_PATH
 
 add_library(liblz4-java SHARED ${LZ4_SRCS_LIB})
 
+find_library(log-lib log)
+target_link_libraries(liblz4-java ${log-lib})
+
 set_target_properties(liblz4-java PROPERTIES
         OUTPUT_NAME lz4-java
         SOVERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}"
